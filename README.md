@@ -1,5 +1,6 @@
 # TeSC: TLS/SSL-Certificate Endorsed Smart Contracts
 > IEEE DAPPS 2021
+
 > The 3<sup>rd</sup> IEEE International Conference on Decentralized Applications and Infrastructures
 
 Ulrich Gallersdörfer<sup>1</sup> and Florian Matthes<sup>1</sup>
@@ -15,6 +16,7 @@ TBD
 
 ## Overview
 ![High-Level  Structure.  The  system  fully  relies  on  the  TLS  PKI  and  partly  relies  on  the  DNS  and  Certificate  Transparency  to  verify  TLS  endorsed Smart Contracts.](img/overview.png "TeSC Overview")
+High-Level  Structure.  The  system  fully  relies  on  the  TLS  PKI  and  partly  relies  on  the  DNS  and  Certificate  Transparency  to  verify  TLS  endorsed Smart Contracts.
 
 ## Interface
 
@@ -75,7 +77,7 @@ interface ERCXXX /* is ERC165 */ {
 ```
 
 ## Flags
-Flags enable additional functionality or restrictions in handling an endorsement. We display a list of all available flags and reasoning. In the smart contracts, we store flags in a `bytes24` variable. This allows us to store up to 192 flags, addressing them from `f<sub>1</sub>` to `f<sub>191</sub>` . Each flag can be set either to *true* or *false*, resulting in `f<sub>i</sub> = {0,1}`.
+Flags enable additional functionality or restrictions in handling an endorsement. We display a list of all available flags and reasoning. In the smart contracts, we store flags in a `bytes24` variable. This allows us to store up to 192 flags, addressing them from f<sub>1</sub> to `f<sub>191</sub>` . Each flag can be set either to *true* or *false*, resulting in `f<sub>i</sub> = {0,1}`.
 
 `f<sub>0</sub>` **SANITY**: The sanity flag is always set to 1 to check if the flag variable is uninitialized or if all flags are actually set intentionally to 0.
 `f<sub>1</sub>` **DOMAIN\_HASHED**: This flag is set if a domain is stored as a hash for privacy reasons. The hash is constructed as $h = hash(domain)$. This flag is set if an owner does not want the smart contract to be easily attributed to the domain by crawling the blockchain. We rely on \texttt{keccak256} as hash function.
