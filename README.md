@@ -23,7 +23,7 @@ High-Level  Structure.  The  system  fully  relies  on  the  TLS  PKI  and  part
 
 ## Interface
 
-```javascript
+```solidity
 pragma solidity ^0.7.0;
 
 interface ERCXXX /* is ERC165 */ {
