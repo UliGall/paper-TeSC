@@ -90,7 +90,6 @@ Flags enable additional functionality or restrictions in handling an endorsement
 * f<sub>5</sub> **ALLOW\_SUBDOMAIN**: If this flag is set, smart contract addresses that are displayed in a subdomain context (the smart contract only being endorsed by the regular domain) can be verified. This is similar to a wildcard in TLS certificates and requires the certificate being issued for the respective domain.
 * f<sub>6</sub> **TRUST\_AFTER\_EXPIRY**: Data that has been entered while the endorsement was valid can still be considered as valid after the endorsement or the TLS certificate expires. Because this information is time-stamped and no one can add or modify the data (without being noticed), the data is considered to be valid if this flag is set. This flag is especially useful for cases in which the blockchain is used to store data for public verification.
 * f<sub>7</sub> **STRICT**: If this flag is set, the certificate returned via the web server must be identical to the certificate that signed the endorsement; otherwise, the verification fails.
-%`f<sub>8</sub> **EVENT\_DATA\_ONLY**: The data of the endorsement itself is not stored on-chain, but resides in the event logs. This significantly reduces the costs of the endorsement.
 * f<sub>x</sub> **reserved**: All other flags are reserved.
 
 
