@@ -14,6 +14,9 @@ Ulrich Gallersdörfer<sup>1</sup> and Florian Matthes<sup>1</sup>
 ## Presentation & Slides
 TBD
 
+## Paper
+TBD
+
 ## Overview
 ![High-Level  Structure.  The  system  fully  relies  on  the  TLS  PKI  and  partly  relies  on  the  DNS  and  Certificate  Transparency  to  verify  TLS  endorsed Smart Contracts.](img/overview.png "TeSC Overview")
 High-Level  Structure.  The  system  fully  relies  on  the  TLS  PKI  and  partly  relies  on  the  DNS  and  Certificate  Transparency  to  verify  TLS  endorsed Smart Contracts.
@@ -77,18 +80,18 @@ interface ERCXXX /* is ERC165 */ {
 ```
 
 ## Flags
-Flags enable additional functionality or restrictions in handling an endorsement. We display a list of all available flags and reasoning. In the smart contracts, we store flags in a `bytes24` variable. This allows us to store up to 192 flags, addressing them from f<sub>1</sub> to `f<sub>191</sub>` . Each flag can be set either to *true* or *false*, resulting in `f<sub>i</sub> = {0,1}`.
+Flags enable additional functionality or restrictions in handling an endorsement. We display a list of all available flags and reasoning. In the smart contracts, we store flags in a `bytes24` variable. This allows us to store up to 192 flags, addressing them from f<sub>1</sub> to f<sub>191</sub> . Each flag can be set either to *true* or *false*, resulting in f<sub>i</sub> = {0,1}.
 
-`f<sub>0</sub>` **SANITY**: The sanity flag is always set to 1 to check if the flag variable is uninitialized or if all flags are actually set intentionally to 0.
-`f<sub>1</sub>` **DOMAIN\_HASHED**: This flag is set if a domain is stored as a hash for privacy reasons. The hash is constructed as $h = hash(domain)$. This flag is set if an owner does not want the smart contract to be easily attributed to the domain by crawling the blockchain. We rely on \texttt{keccak256} as hash function.
-`f<sub>2</sub>` **ALLOW\_SUBENDORSEMENT**: This flag is set if a smart contract is able to endorse further addresses such as contracts or externally owned accounts. The referenced smart contracts are stored in an array of the respective endorsing smart contract. If this flag is not set, the verification of the subendorsements fails.
-`f<sub>3</sub>` **EXCLUSIVE**: If this flag is set, one contract equipped with a valid endorsement can exist; if multiples exist, no contract is considered to be valid as long as the owner resolves the issues by either invalidating the endorsements, or removing the EXCLUSIVE flag from the contracts.
-`f<sub>4</sub>` **PAYABLE**: If a domain owner wants to allow users to send funds to the domain (owner), the owner sets this flag to let users know that this contract accepts funds.
-`f<sub>5</sub>` **ALLOW\_SUBDOMAIN**: If this flag is set, smart contract addresses that are displayed in a subdomain context (the smart contract only being endorsed by the regular domain) can be verified. This is similar to a wildcard in TLS certificates and requires the certificate being issued for the respective domain.
-`f<sub>6</sub>` **TRUST\_AFTER\_EXPIRY**: Data that has been entered while the endorsement was valid can still be considered as valid after the endorsement or the TLS certificate expires. Because this information is time-stamped and no one can add or modify the data (without being noticed), the data is considered to be valid if this flag is set. This flag is especially useful for cases in which the blockchain is used to store data for public verification.
-`f<sub>7</sub>` **STRICT**: If this flag is set, the certificate returned via the web server must be identical to the certificate that signed the endorsement; otherwise, the verification fails.
-%`f<sub>8</sub>` **EVENT\_DATA\_ONLY**: The data of the endorsement itself is not stored on-chain, but resides in the event logs. This significantly reduces the costs of the endorsement.
-`f<sub>x</sub>` **reserved**: All other flags are reserved.
+* f<sub>0</sub> **SANITY**: The sanity flag is always set to 1 to check if the flag variable is uninitialized or if all flags are actually set intentionally to 0.
+* f<sub>1</sub> **DOMAIN\_HASHED**: This flag is set if a domain is stored as a hash for privacy reasons. The hash is constructed as $h = hash(domain)$. This flag is set if an owner does not want the smart contract to be easily attributed to the domain by crawling the blockchain. We rely on \texttt{keccak256} as hash function.
+* f<sub>2</sub> **ALLOW\_SUBENDORSEMENT**: This flag is set if a smart contract is able to endorse further addresses such as contracts or externally owned accounts. The referenced smart contracts are stored in an array of the respective endorsing smart contract. If this flag is not set, the verification of the subendorsements fails.
+* f<sub>3</sub> **EXCLUSIVE**: If this flag is set, one contract equipped with a valid endorsement can exist; if multiples exist, no contract is considered to be valid as long as the owner resolves the issues by either invalidating the endorsements, or removing the EXCLUSIVE flag from the contracts.
+* f<sub>4</sub> **PAYABLE**: If a domain owner wants to allow users to send funds to the domain (owner), the owner sets this flag to let users know that this contract accepts funds.
+* f<sub>5</sub> **ALLOW\_SUBDOMAIN**: If this flag is set, smart contract addresses that are displayed in a subdomain context (the smart contract only being endorsed by the regular domain) can be verified. This is similar to a wildcard in TLS certificates and requires the certificate being issued for the respective domain.
+* f<sub>6</sub> **TRUST\_AFTER\_EXPIRY**: Data that has been entered while the endorsement was valid can still be considered as valid after the endorsement or the TLS certificate expires. Because this information is time-stamped and no one can add or modify the data (without being noticed), the data is considered to be valid if this flag is set. This flag is especially useful for cases in which the blockchain is used to store data for public verification.
+* f<sub>7</sub> **STRICT**: If this flag is set, the certificate returned via the web server must be identical to the certificate that signed the endorsement; otherwise, the verification fails.
+%`f<sub>8</sub> **EVENT\_DATA\_ONLY**: The data of the endorsement itself is not stored on-chain, but resides in the event logs. This significantly reduces the costs of the endorsement.
+* f<sub>x</sub> **reserved**: All other flags are reserved.
 
 
 ## Contract Source Codes
